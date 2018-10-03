@@ -1,3 +1,5 @@
+USE [DBAdmin];
+
 --Create Table dbadmin.dbo.DBGrowthRate_TXLog_15
 --(DBGrowthID int identity(1,1), 
 --DBName varchar(100), DBID int,

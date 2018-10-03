@@ -6,11 +6,13 @@ declare @scheduleid int,
 
 DECLARE My_Cursor CURSOR
 
+-- only do this for the DBA related jobs!
 FOR
 select js.schedule_id from
 msdb.dbo.sysjobschedules js
 inner join msdb.dbo.sysjobs s
 on js.job_id = s.job_id 
+where s.name like 'DBA - %'
 
 OPEN My_Cursor
 
@@ -21,7 +23,7 @@ WHILE (@@FETCH_STATUS <> -1)
 BEGIN
 
 EXEC msdb.dbo.sp_update_schedule @schedule_id=@scheduleid, 
-		@active_start_date= 20180906
+		@active_start_date= 20180918 -- YYYYMMDD
 
 FETCH NEXT FROM My_Cursor INTO @scheduleid
 END 
